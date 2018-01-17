@@ -13,10 +13,11 @@ public abstract class TaskList implements Iterable<Task> {
         else taskList = new ArrayTaskList();
         for (int i = 0; i < this.size(); i++) {
             Task temp = this.getTask(i);
-            if (temp.nextTimeAfter(from).before(to) && (!temp.nextTimeAfter(from).equals(null))) {
+            if((temp.nextTimeAfter(from)!=null)){
+            if (temp.nextTimeAfter(from).before(to)) {
                 taskList.add(this.getTask(i));
-            }
-        }
+            }}
+       }
         return taskList;
     }
     public abstract Iterator<Task> iterator();

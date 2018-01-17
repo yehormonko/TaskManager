@@ -103,7 +103,7 @@ public class Task implements Cloneable {
     }
     
     public Date nextTimeAfter(Date current) {
-    int ninterval = this.interval * 1000;
+    int ninterval = this.interval*1000;
         if (!active) return null;
         if (!repeated) {
             if (current.after(time) || (current.equals(time))) {
@@ -162,8 +162,10 @@ public class Task implements Cloneable {
     public String toString() {
         String rezult;
         if (repeated) {
-            rezult = "{" + title + ": start=" + start + " ,end=" + end + " ,interval=" + interval + ", repeated}";
-        } else rezult = "{" + title + " time=" + time + ", not repeated}";
+            rezult = "{" + title + ": start=" + start + ", end=" + end + ", interval=" + interval/3600 + "h, repeated";
+        } else rezult = "{" + title + " time=" + time + ", not repeated ";
+        if(active) rezult+=", active}";
+        else rezult+=", not active";
         return rezult;
     }
 

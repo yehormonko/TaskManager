@@ -54,7 +54,7 @@ public class ArrayTaskList extends TaskList {
     public Task getTask(int index) { return tasks[index]; }
 
     public Iterator<Task> iterator() {
-        return new Iterator<>() {
+        return new Iterator<Task>() {
             private int cursor = 0;
             boolean useNext = false;
 

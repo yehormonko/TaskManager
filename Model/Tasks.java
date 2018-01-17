@@ -8,6 +8,7 @@ public class Tasks {
                  Task temp = null;
                  while (iter.hasNext()) {
                      temp = iter.next().clone();
+                     System.out.println(temp);
                      if ((!(temp.nextTimeAfter(start) == null)) && (temp.nextTimeAfter(start).before(end) || temp.nextTimeAfter(start).equals(end))){
                          list.add(temp);
                      }
@@ -26,7 +27,7 @@ public class Tasks {
                 temp = iterator.next();
                 if (!temp.isRepeated()&&temp.isActive()) {
                     if (!temp.nextTimeAfter(start).after(end)) {
-                        if (calendar.get(temp.nextTimeAfter(start)) == null) {
+                        if (calendar.containsKey(temp.nextTimeAfter(start))) {
                             HashSet<Task> ts = new HashSet<>();
                             ts.add(temp);
                             calendar.put(temp.nextTimeAfter(start), ts);
@@ -36,8 +37,8 @@ public class Tasks {
                     }
                 } else if(temp.isActive()){
                     date = temp.nextTimeAfter(start);
-                    while (!date.after(end)) {
-                        if (calendar.get(date) != null) {
+                    while (!date.after(end)&&date!=null) {
+                        if (calendar.containsKey(date)) {
                             calendar.get(date).add(temp);
                         }
                         else {
@@ -45,7 +46,9 @@ public class Tasks {
                             ts.add(temp);
                             calendar.put(date, ts);
                         }
-                        date = temp.nextTimeAfter(date);
+                        System.out.println(temp.getRepeatInterval()+"-----");
+                        date.setTime(date.getTime()+temp.getRepeatInterval()*1000*3600);
+                      //  date = temp.nextTimeAfter(date);
                     }
                 }
             }
